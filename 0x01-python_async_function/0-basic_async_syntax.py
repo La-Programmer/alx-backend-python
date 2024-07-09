@@ -2,7 +2,9 @@
 """Python async"""
 
 import asyncio
-import random, time
+import random
+import time
+
 
 async def wait_random(max_delay: int = 10) -> float:
     """Wait random"""
