@@ -3,12 +3,10 @@
 
 import asyncio
 import random
-import time
 
 
 async def wait_random(max_delay: int = 10) -> float:
     """Wait random"""
-    s = time.perf_counter()
-    await asyncio.sleep(random.randint(0, max_delay))
-    res = time.perf_counter() - s
-    return res
+    random_delay = random.uniform(0, max_delay)
+    await asyncio.sleep(random_delay)
+    return random_delay
