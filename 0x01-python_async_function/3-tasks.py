@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Task"""
+"""Synchronous call to async task"""
 
 import asyncio
 wait_random: float = __import__('0-basic_async_syntax').wait_random
