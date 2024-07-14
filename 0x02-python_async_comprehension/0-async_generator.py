@@ -3,13 +3,13 @@
 
 import asyncio
 import random
-from typing import AsyncGenerator
+from typing import Generator
 
 
-async def async_generator() -> AsyncGenerator[int, None]:
+async def async_generator() -> Generator[int, None]:
     """Async generator function"""
     for i in range(10):
         i: int
         await asyncio.sleep(1)
-        random_result: AsyncGenerator[int, None] = random.uniform(0, 10)
+        random_result: Generator[int, None] = random.uniform(0, 10)
         yield random_result
