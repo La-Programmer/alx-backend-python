@@ -4,9 +4,8 @@
 import unittest.mock
 from parameterized import parameterized
 import unittest
-from unittest.mock import patch, Mock
+from unittest.mock import patch, Mock, PropertyMock
 from client import GithubOrgClient
-import json
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -30,3 +29,13 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(actual_result, test_data['expected'])
         arg = f"https://api.github.com/orgs/{test_data['input']}"
         mock_get.assert_called_once_with(arg)
+
+    def test_public_repos_url(self):
+        """Test Methid for GithubOrgClient._public_epos_url"""
+        with patch('client.GithubOrgClient.org',
+                   new_callable=PropertyMock) as mock_org:
+            mock_org.return_value = {'repos_url': "https://example.com"}
+            org = GithubOrgClient('abc')
+
+            actual_result = org._public_repos_url
+            self.assertEqual(actual_result, "https://example.com")
