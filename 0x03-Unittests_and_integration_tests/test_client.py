@@ -56,3 +56,23 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(actual_result, ['Real life', 'Fake life'])
             mock_get_json.assert_called_once()
             mock_repos.assert_called_once()
+
+    @parameterized.expand([
+        ('case1', {
+            'input1': {'license': {'key': 'my_license'}},
+            'input2': 'my_license',
+            'expected': True,
+        }),
+        ('case2', {
+            'input1': {"license": {"key": "other_license"}},
+            'input2': "my_license",
+            'expected': False,
+        })
+    ])
+    def test_has_license(self, name, test_data):
+        """Test Method to test GithubOrgClient.has_license"""
+        actual_result = GithubOrgClient.has_license(
+            test_data['input1'],
+            test_data['input2'],
+        )
+        self.assertEqual(actual_result, test_data['expected'])
